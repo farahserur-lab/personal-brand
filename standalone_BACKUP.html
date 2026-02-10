@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farah Rose - Artist Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            user-select: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            height: 100vh;
+        }
+
+        /* Win95 Styling */
+        .win95-window {
+            background: #C0C0C0;
+            border: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            position: absolute;
+        }
+
+        .win95-titlebar {
+            background: linear-gradient(to right, #000080, #1084d0);
+            color: white;
+            padding: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .win95-button {
+            background: #C0C0C0;
+            border: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .win95-button:active {
+            border-color: #000000 #ffffff #ffffff #000000;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 2px;
+        }
+
+        .window-controls button {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .menu-bar {
+            background: #C0C0C0;
+            border-top: 1px solid white;
+            border-bottom: 1px solid #808080;
+            padding: 4px 8px;
+            font-size: 12px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .menu-item {
+            cursor: pointer;
+            padding: 2px 4px;
+        }
+
+        .menu-item:hover {
+            background: #000080;
+            color: white;
+        }
+
+        .window-content {
+            background: white;
+            padding: 16px;
+            overflow: auto;
+        }
+
+        /* Desktop */
+        .desktop {
+            height: calc(100vh - 40px);
+            padding: 16px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 100px);
+            gap: 16px;
+            align-content: start;
+        }
+
+        .desktop-icon {
+            text-align: center;
+            cursor: pointer;
+            padding: 8px;
+            border: 2px solid transparent;
+        }
+
+        .desktop-icon:hover {
+            background: rgba(0, 0, 128, 0.2);
+        }
+
+        .desktop-icon.selected {
+            background: rgba(0, 0, 128, 0.3);
+            border: 2px dotted #000;
+        }
+
+        .icon-image {
+            font-size: 48px;
+            margin-bottom: 4px;
+        }
+
+        .icon-label {
+            font-size: 11px;
+            color: white;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 1);
+        }
+
+        /* Taskbar */
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: #C0C0C0;
+            border-top: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            padding: 4px;
+            gap: 4px;
+            z-index: 10000;
+        }
+
+        .start-button {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .taskbar-clock {
+            margin-left: auto;
+            padding: 4px 12px;
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            font-size: 12px;
+        }
+
+        .task-button {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        /* Start Menu */
+        .start-menu {
+            position: fixed;
+            bottom: 40px;
+            left: 0;
+            width: 256px;
+            background: #C0C0C0;
+            border: 2px solid;
+            border-color: #ffffff #000000 #000000 #ffffff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .start-menu-header {
+            background: linear-gradient(to bottom, #000080, #1084d0);
+            color: white;
+            padding: 8px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .start-menu-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        .start-menu-item:hover {
+            background: #000080;
+            color: white;
+        }
+
+        .start-menu-divider {
+            border-top: 2px solid #808080;
+            margin: 4px 0;
+        }
+
+        /* Boot Screen */
+        .boot-screen {
+            position: fixed;
+            inset: 0;
+            background: black;
+            color: #00ff00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 32px;
+            z-index: 20000;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .boot-text {
+            font-size: 14px;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .boot-progress {
+            width: 300px;
+            height: 20px;
+            background: #333;
+            border: 2px solid #666;
+        }
+
+        .boot-progress-bar {
+            height: 100%;
+            background: #00ff00;
+            animation: loading 3s ease-in-out;
+        }
+
+        @keyframes loading {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        /* Canvas for Paint */
+        canvas {
+            border: 1px solid #808080;
+            cursor: crosshair;
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive text areas */
+        textarea, input[type="text"], input[type="email"] {
+            font-family: 'Courier New', Courier, monospace;
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
+            padding: 4px;
+            font-size: 12px;
+        }
+        
+        /* Artwork thumbnails */
+        .artwork-thumb:hover {
+            border-color: #ff6b9d !important;
+            transform: scale(1.02);
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Boot Screen -->
+    <div id="bootScreen" class="boot-screen">
+        <h1 style="font-size: 36px;">FARAH ROSE OS</h1>
+        <div class="boot-text">
+            <div>Starting Creative System...</div>
+            <div>Loading consciousness.sys...</div>
+            <div>Initializing full_mind_party.exe...</div>
+            <div>Loading artist_statement.txt...</div>
+            <div>Welcome to the party<span id="loadingDots">...</span></div>
+        </div>
+        <div class="boot-progress">
+            <div class="boot-progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- Desktop -->
+    <div id="desktop" class="desktop hidden">
+        <div class="desktop-icon" data-window="about">
+            <div class="icon-image">🎨</div>
+            <div class="icon-label">About_Me.txt</div>
+        </div>
+        <div class="desktop-icon" data-window="portfolio">
+            <div class="icon-image">🖼️</div>
+            <div class="icon-label">Gallery.exe</div>
+        </div>
+        <div class="desktop-icon" data-window="notepad">
+            <div class="icon-image">📝</div>
+            <div class="icon-label">Statement.txt</div>
+        </div>
+        <div class="desktop-icon" data-window="paint">
+            <div class="icon-image">✏️</div>
+            <div class="icon-label">Paint.exe</div>
+        </div>
+        <div class="desktop-icon" data-window="contact">
+            <div class="icon-image">📧</div>
+            <div class="icon-label">Contact.lnk</div>
+        </div>
+        <div class="desktop-icon" data-window="music">
+            <div class="icon-image">🎵</div>
+            <div class="icon-label">Music.mp3</div>
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div id="taskbar" class="taskbar hidden">
+        <button class="win95-button start-button" id="startBtn">
+            <span style="font-size: 20px;">🪟</span>
+            Start
+        </button>
+        <div id="taskButtons" style="display: flex; gap: 4px; flex: 1;"></div>
+        <div class="taskbar-clock" id="clock">12:00 PM</div>
+    </div>
+
+    <!-- Start Menu -->
+    <div id="startMenu" class="start-menu hidden">
+        <div class="start-menu-header">FARAH ROSE</div>
+        <div>
+            <div class="start-menu-item" data-window="about">
+                <span style="font-size: 20px;">🎨</span>
+                About Me
+            </div>
+            <div class="start-menu-item" data-window="portfolio">
+                <span style="font-size: 20px;">🖼️</span>
+                Gallery
+            </div>
+            <div class="start-menu-item" data-window="notepad">
+                <span style="font-size: 20px;">📝</span>
+                Artist Statement
+            </div>
+            <div class="start-menu-item" data-window="paint">
+                <span style="font-size: 20px;">✏️</span>
+                Paint
+            </div>
+            <div class="start-menu-item" data-window="contact">
+                <span style="font-size: 20px;">📧</span>
+                Contact
+            </div>
+            <div class="start-menu-item" data-window="music">
+                <span style="font-size: 20px;">🎵</span>
+                Music Player
+            </div>
+            <div class="start-menu-divider"></div>
+            <div class="start-menu-item" style="font-weight: bold;">
+                <span style="font-size: 20px;">⏻</span>
+                Shut Down...
+            </div>
+        </div>
+    </div>
+
+    <!-- Windows Container -->
+    <div id="windowsContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

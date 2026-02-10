@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farah Rose — Artist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #FAFAFA;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --accent: #E85D75;
+            --accent-soft: #FFF0F3;
+            --border: #E5E5E5;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(250, 250, 250, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        nav.scrolled {
+            border-bottom-color: var(--border);
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 48px 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-tag {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 600;
+            line-height: 1.05;
+            letter-spacing: -3px;
+            margin-bottom: 32px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 540px;
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: var(--text);
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .hero-cta:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .hero-cta svg {
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+            max-width: 500px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 120px 48px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 64px;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 600;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .section-description {
+            color: var(--text-muted);
+            max-width: 400px;
+            font-size: 16px;
+        }
+
+        /* Work/Gallery Grid */
+        #work {
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            aspect-ratio: 4/5;
+        }
+
+        .gallery-item:nth-child(1),
+        .gallery-item:nth-child(6) {
+            grid-column: span 2;
+            aspect-ratio: 16/9;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 32px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-title {
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-title {
+            transform: translateY(0);
+        }
+
+        .gallery-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.1s;
+        }
+
+        .gallery-item:hover .gallery-desc {
+            transform: translateY(0);
+        }
+
+        /* About Section */
+        #about {
+            background: var(--bg);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .about-images img {
+            width: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .about-images img:first-child {
+            height: 400px;
+            transform: translateY(40px);
+        }
+
+        .about-images img:last-child {
+            height: 350px;
+        }
+
+        .about-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -2px;
+            margin-bottom: 32px;
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .about-quote {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text);
+            padding: 32px;
+            background: var(--accent-soft);
+            border-radius: 12px;
+            margin-top: 40px;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Statement Section */
+        #statement {
+            background: var(--text);
+            color: white;
+        }
+
+        #statement .section-label {
+            color: var(--accent);
+        }
+
+        #statement .section-title {
+            color: white;
+        }
+
+        .statement-text {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .statement-text p {
+            font-size: 20px;
+            line-height: 2;
+            margin-bottom: 32px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .statement-text p:first-of-type::first-letter {
+            font-size: 64px;
+            float: left;
+            line-height: 1;
+            margin-right: 16px;
+            margin-top: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Resources Section */
+        #resources {
+            background: white;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .resource-card {
+            padding: 40px;
+            background: var(--bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--accent);
+        }
+
+        .resource-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
+        }
+
+        .resource-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .resource-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        /* Audio Section */
+        #studio {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+        }
+
+        .studio-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .studio-text h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .studio-text p {
+            color: rgba(255,255,255,0.7);
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .audio-player {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .audio-player audio {
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        .audio-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .audio-subtitle {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--bg);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-info h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            font-size: 17px;
+            margin-bottom: 40px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            background: white;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            transform: translateX(8px);
+        }
+
+        .contact-link span:first-child {
+            font-size: 24px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 48px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--text);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent);
+        }
+
+        /* Available For */
+        .available-for {
+            margin-top: 40px;
+            padding: 24px;
+            background: var(--accent-soft);
+            border-radius: 12px;
+        }
+
+        .available-for h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .available-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .available-tags span {
+            padding: 8px 16px;
+            background: white;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px;
+            background: var(--text);
+            color: white;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        footer p {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 48px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: var(--accent);
+        }
+
+        .lightbox img {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .lightbox-info {
+            margin-top: 24px;
+            color: white;
+        }
+
+        .lightbox-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .lightbox-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 20px 24px;
+            }
+
+            section {
+                padding: 80px 24px;
+            }
+
+            .hero {
+                padding: 100px 24px 60px;
+                flex-direction: column;
+            }
+
+            .hero-image {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 100%;
+                max-width: 100%;
+                margin-top: 48px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(6) {
+                grid-column: span 1;
+                aspect-ratio: 4/5;
+            }
+
+            .about-grid,
+            .studio-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-images img:first-child {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Farah Rose</div>
+        <ul class="nav-links">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#statement">Statement</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">Contemporary Figurative Artist</div>
+            <h1>Full Mind <span>Party</span></h1>
+            <p class="hero-description">
+                An exploration of the intricate, often overwhelming landscape of contemporary consciousness. 
+                Bold colors, layered compositions, and figures caught in moments of introspection, celebration, and connection.
+            </p>
+            <a href="#work" class="hero-cta">
+                View Gallery
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="hero-image">
+            <img src="images/mindfully-mind-full.jpg" alt="Full Mind Party Artwork">
+        </div>
+    </section>
+
+    <!-- Work/Gallery Section -->
+    <section id="work">
+        <div class="section-header">
+            <div>
+                <div class="section-label">Selected Works</div>
+                <h2 class="section-title">The Gallery</h2>
+            </div>
+            <p class="section-description">Click any piece to explore the story and meaning behind each work.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox(0)">
+                <img src="images/mindfully-mind-full.jpg" alt="Mindfully, Mind Full">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Mindfully, Mind Full</div>
+                    <div class="gallery-desc">Full Mind Party Collection</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(1)">
+                <img src="images/ladies-of-lately.jpg" alt="Ladies of Lately">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Ladies of Lately</div>
+                    <div class="gallery-desc">Full Mind Party Collection</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(2)">
+                <img src="images/time-travel.jpg" alt="Time Travel">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Time Travel</div>
+                    <div class="gallery-desc">Full Mind Party Collection</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(3)">
+                <img src="images/warped-lens-ii.jpg" alt="Warped Lens II">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Warped Lens II</div>
+                    <div class="gallery-desc">Warped Lens Series</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(4)">
+                <img src="images/warped-lens-iii.jpg" alt="Warped Lens III">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Warped Lens III</div>
+                    <div class="gallery-desc">Warped Lens Series</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(5)">
+                <img src="images/unphased.png" alt="Unphased">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Unphased</div>
+                    <div class="gallery-desc">Full Mind Party Collection</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(6)">
+                <img src="images/drink-and-dance.png" alt="A Drink & a Dance">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">A Drink & a Dance</div>
+                    <div class="gallery-desc">Full Mind Party Collection</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(7)">
+                <img src="images/night-with-band.png" alt="Night with the Band">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Night with the Band</div>
+                    <div class="gallery-desc">Full Mind Party Collection</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(8)">
+                <img src="images/boy-meet-bed.jpg" alt="Boy Meet Bed">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Boy Meet Bed</div>
+                    <div class="gallery-desc">Portrait Series</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(9)">
+                <img src="images/embodied-body.jpg" alt="Embodied Body">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Embodied Body</div>
+                    <div class="gallery-desc">Body of Work</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(10)">
+                <img src="images/lisbon-art.jpg" alt="Lisbon">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Lisbon</div>
+                    <div class="gallery-desc">Travel Series</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(11)">
+                <img src="images/bahn-mi.jpg" alt="Bahn-mi">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Bahn-mi</div>
+                    <div class="gallery-desc">Everyday Moments</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-images">
+                <img src="images/farah-portrait.jpg" alt="Farah Rose">
+                <img src="images/profile-sunglass.jpg" alt="Self Portrait">
+            </div>
+            <div class="about-content">
+                <div class="section-label">About the Artist</div>
+                <h2>Farah Rose</h2>
+                <p>
+                    My mind is a party where everyone is talking at once, the music is slightly too loud, 
+                    and the guest list was lost years ago.
+                </p>
+                <p>
+                    I'm a contemporary figurative painter exploring the beautiful chaos of modern life through 
+                    bold colors, layered compositions, and figures caught in moments of introspection, 
+                    celebration, and connection.
+                </p>
+                <p>
+                    My work captures the friction created when the desire for presence meets the reality 
+                    of digital noise—a visual record of attempting to be "mindful" when one's mind is 
+                    perpetually "full."
+                </p>
+                <div class="about-quote">
+                    "Welcome to the party. We have fun here."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artist Statement Section -->
+    <section id="statement">
+        <div class="section-header" style="justify-content: center; text-align: center;">
+            <div>
+                <div class="section-label">Artist Statement</div>
+                <h2 class="section-title">Full Mind Party</h2>
+            </div>
+        </div>
+        <div class="statement-text">
+            <p>
+                My exhibition, Full Mind Party, is an exploration of the intricate, often overwhelming landscape of 
+                contemporary consciousness. It is a playful depiction of attempts to be "mindful" when one's mind is 
+                perpetually "full"—a constant cacophony of intentions, creative friction, and digital noise.
+            </p>
+            <p>
+                We are told to be mindful. We are sold the image of the "empty" mind—a white-walled gallery of a brain 
+                where thoughts are hung neatly, spaced perfectly apart, silent and still. But my mind has never looked 
+                like that.
+            </p>
+            <p>
+                Ironically, the very process of naming two pieces of this collection became a microcosm of the show's theme. 
+                What began as a simple task to title "Mindfully, Mind Full" and "Mind, Fully Mindful" quickly devolved into 
+                a two-hour, multi-iteration dialogue with an AI—a testament to the spiraling nature of creative thought.
+            </p>
+            <p>
+                This exhibition is not just about the finished canvases, but about the mental landscape they represent. 
+                By putting them on the page, the silo opens up. The "Full Mind" is no longer a burden; it's an invitation.
+            </p>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources">
+        <div class="section-header">
+            <div>
+                <div class="section-label">Downloads</div>
+                <h2 class="section-title">Resources</h2>
+            </div>
+        </div>
+        <div class="resources-grid">
+            <a href="images/art-book-2026.pdf" target="_blank" class="resource-card">
+                <div class="resource-icon">📚</div>
+                <h3>2026 Art Book</h3>
+                <p>A comprehensive collection of recent works from the Full Mind Party exhibition.</p>
+                <div class="resource-link">
+                    Download PDF
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </div>
+            </a>
+            <a href="images/ai-naming-journey.pdf" target="_blank" class="resource-card">
+                <div class="resource-icon">🤖</div>
+                <h3>The AI Naming Journey</h3>
+                <p>The Gemini Art Title Spiral—a two-hour creative dialogue documented.</p>
+                <div class="resource-link">
+                    Download PDF
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </div>
+            </a>
+            <a href="images/full-mind-physical-form.pdf" target="_blank" class="resource-card">
+                <div class="resource-icon">🎨</div>
+                <h3>Giving Full Mind Physical Form</h3>
+                <p>Essay on transforming digital art concepts into tangible artifacts.</p>
+                <div class="resource-link">
+                    Download PDF
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Studio Session Section -->
+    <section id="studio">
+        <div class="studio-content">
+            <div class="studio-text">
+                <div class="section-label">Listen</div>
+                <h2>Studio Sessions</h2>
+                <p>
+                    A candid studio recording exploring the journey from digital concepts to physical artifacts—the 
+                    process, the challenges, and the joy of giving ideas physical form.
+                </p>
+                <p>
+                    Hear thoughts on how digital art transforms into tangible pieces, and what it means to bring 
+                    the Full Mind Party into the physical world.
+                </p>
+            </div>
+            <div class="audio-player">
+                <audio controls>
+                    <source src="images/studio-process.m4a" type="audio/mp4">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="audio-title">Design Digital Art Into Physical Artifacts</div>
+                <div class="audio-subtitle">Studio Process Recording 2</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="section-label">Get in Touch</div>
+                <h2>Let's Connect</h2>
+                <p>
+                    Interested in collaborating, commissioning a piece, or just want to chat about art? 
+                    I'd love to hear from you.
+                </p>
+                <div class="contact-links">
+                    <a href="https://instagram.com/strokesbeforefolks" target="_blank" class="contact-link">
+                        <span>📸</span>
+                        <span>@strokesbeforefolks</span>
+                    </a>
+                    <a href="mailto:farahmakesart@gmail.com" class="contact-link">
+                        <span>✉️</span>
+                        <span>farahmakesart@gmail.com</span>
+                    </a>
+                    <a href="https://farahrose.xyz" target="_blank" class="contact-link">
+                        <span>🌐</span>
+                        <span>farahrose.xyz</span>
+                    </a>
+                </div>
+                <div class="available-for">
+                    <h4>Available For</h4>
+                    <div class="available-tags">
+                        <span>Commissions</span>
+                        <span>Exhibitions</span>
+                        <span>Collaborations</span>
+                        <span>Studio Visits</span>
+                        <span>Speaking</span>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks for your message! I\'ll get back to you soon.');">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea placeholder="Tell me about your project or inquiry..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Farah Rose</div>
+        <p>&copy; 2026 Farah Rose. All rights reserved.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+            <div class="lightbox-info">
+                <div class="lightbox-title" id="lightbox-title"></div>
+                <div class="lightbox-desc" id="lightbox-desc"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Artwork data
+        const artworks = [
+            {
+                title: 'Mindfully, Mind Full',
+                image: 'images/mindfully-mind-full.jpg',
+                description: 'A visual exploration of the "full mind" experience—where figures navigate overlapping thoughts, conversations, and the beautiful chaos of contemporary consciousness.'
+            },
+            {
+                title: 'Ladies of Lately',
+                image: 'images/ladies-of-lately.jpg',
+                description: 'Bold, layered composition capturing the energy and complexity of modern femininity, social connection, and the moments we share.'
+            },
+            {
+                title: 'Time Travel',
+                image: 'images/time-travel.jpg',
+                description: 'A surreal journey through memory and perception, where past and present collapse into a single, layered moment.'
+            },
+            {
+                title: 'Warped Lens II',
+                image: 'images/warped-lens-ii.jpg',
+                description: 'Part of the Warped Lens series—exploring perception through distorted perspectives, where reality bends and familiar forms become fluid.'
+            },
+            {
+                title: 'Warped Lens III',
+                image: 'images/warped-lens-iii.jpg',
+                description: 'The third in the Warped Lens series—continuing the exploration of how we see and are seen, filtered through layers of experience.'
+            },
+            {
+                title: 'Unphased',
+                image: 'images/unphased.png',
+                description: 'An intimate study of composure and multiplicity—the many faces we hold simultaneously, unphased by the noise around us.'
+            },
+            {
+                title: 'A Drink & a Dance',
+                image: 'images/drink-and-dance.png',
+                description: 'Capturing the fleeting joy of connection—a moment of celebration, presence, and shared experience.'
+            },
+            {
+                title: 'Night with the Band',
+                image: 'images/night-with-band.png',
+                description: 'An intimate gathering filled with color, texture, and the warmth of creative community and late-night conversations.'
+            },
+            {
+                title: 'Boy Meet Bed',
+                image: 'images/boy-meet-bed.jpg',
+                description: 'An intimate portrait of vulnerability and rest—capturing the quiet moments between the noise, where the body surrenders to stillness.'
+            },
+            {
+                title: 'Embodied Body',
+                image: 'images/embodied-body.jpg',
+                description: 'A celebration of physical presence and form—the body as landscape, as home, as the vessel that carries our full minds through the world.'
+            },
+            {
+                title: 'Lisbon',
+                image: 'images/lisbon-art.jpg',
+                description: 'Inspired by the light and energy of Lisbon—where old world charm collides with contemporary life in vibrant color and texture.'
+            },
+            {
+                title: 'Bahn-mi',
+                image: 'images/bahn-mi.jpg',
+                description: 'A playful exploration of cultural fusion and everyday beauty—finding art in the moments of nourishment and shared meals.'
+            }
+        ];
+
+        // Lightbox functions
+        function openLightbox(index) {
+            const artwork = artworks[index];
+            document.getElementById('lightbox-img').src = artwork.image;
+            document.getElementById('lightbox-title').textContent = artwork.title;
+            document.getElementById('lightbox-desc').textContent = artwork.description;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close lightbox with escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Close lightbox when clicking outside
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+
+        // Nav scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
